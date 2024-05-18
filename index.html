@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Js CRUD Operations</title>
-    <script src="main.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -14,26 +13,27 @@
         <h1>Js CRUD Operations</h1>
         
         <div class="forms-container">
-            <form class="create-form" onsubmit="submitForm()">
+            <form class="create-form show" onsubmit="createRecord(event)">
                 <input type="text" id="name" name="name" placeholder="Enter name"/>
                 <input type="email" id="email" name="email" placeholder="Enter email"/>
                 <input type="text" id="age" name="age" placeholder="Enter age"/>
                 <button type="submit" class="add-button">Add Record</button>
             </form>
-            <form class="update-form" onsubmit="updateForm()">
+            <form class="update-form hide" method="post">
                 <input type="text" id="uname" name="name" placeholder="Enter name"/>
                 <input type="email" id="uemail" name="email" placeholder="Enter email"/>
                 <input type="text"  id="uage" name="age" placeholder="Enter age"/>
-                <button type="submit" class="update-button">Update Details</button>
+                <button type="submit" onclick="updateRecord()" class="update-button">Update Details</button>
             </form>
         </div>
 
         <div class="table-container">
             <table>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Age</th>
+                    <th width="15%">Name</th>
+                    <th width="30%">Email</th>
+                    <th width="25%">Age</th>
+                    <th width="30%">Actions</th>
                 </tr>
                 <tbody class="table-body">
                     <!-- data will added here -->
@@ -42,6 +42,8 @@
         </div>
     </div>
     
+
+    <script src="main.js"></script>
 
     
 </body>

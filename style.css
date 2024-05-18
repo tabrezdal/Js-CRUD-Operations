@@ -18,7 +18,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.main{
+.main {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -29,13 +29,14 @@ h1 {
     margin: 20px;
 }
 
-.forms-container{
+.forms-container {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.create-form, .update-form{
+.create-form,
+.update-form {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,6 +59,7 @@ button {
     color: white;
     padding: 6px 12px;
     width: 120px;
+    cursor: pointer;
 }
 
 button:hover {
@@ -68,15 +70,47 @@ button:hover {
     background-color: rgb(7, 197, 0);
 }
 
-.update-button{
+.update-button {
     background-color: rgb(0, 89, 255);
 }
 
-
-.table-container{
-    margin-top: 20px;
+button.update,
+button.delete {
+    width: 80px;
 }
 
-table, th, td {
-    border: 1px solid rgb(224, 224, 224)
-  }
+
+.table-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid rgb(224, 224, 224);
+}
+
+td {
+    text-align: center;
+}
+
+.error {
+    color: red;
+    background-color: pink;
+    width: 100%;
+    border-radius: 4px;
+    padding: 4px
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
