@@ -9,6 +9,40 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Js CRUD Operations</h1>
+    <div class="main">
+        
+        <h1>Js CRUD Operations</h1>
+        
+        <div class="forms-container">
+            <form class="create-form" onsubmit="submitForm()">
+                <input type="text" id="name" name="name" placeholder="Enter name"/>
+                <input type="email" id="email" name="email" placeholder="Enter email"/>
+                <input type="text" id="age" name="age" placeholder="Enter age"/>
+                <button type="submit" class="add-button">Add Record</button>
+            </form>
+            <form class="update-form" onsubmit="updateForm()">
+                <input type="text" id="uname" name="name" placeholder="Enter name"/>
+                <input type="email" id="uemail" name="email" placeholder="Enter email"/>
+                <input type="text"  id="uage" name="age" placeholder="Enter age"/>
+                <button type="submit" class="update-button">Update Details</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+                <tbody class="table-body">
+                    <!-- data will added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    
 </body>
 </html>
