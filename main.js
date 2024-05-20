@@ -140,20 +140,14 @@ function updateHandler(currentID) {
 
 // Function to Udpate Existing Records
 function updateRecord(event) {
-
     event.preventDefault(); // Prevent form submission
-
-    // console.table("before update userData::", userData);
 
     let name = document.querySelector("#uname").value;
     let email = document.querySelector("#uemail").value;
     let age = document.querySelector("#uage").value;
-    let id = document.querySelector("#uid").value;
-    // let filteredUserData = userData.filter((item) => item !== uid);
+    let id = Number(document.querySelector("#uid").value);
 
     if (name !== "" && email !== "" && (age > 0 && age < 100)) {
-        
-
         let updatedValues = {
             id,
             name,
@@ -161,29 +155,35 @@ function updateRecord(event) {
             age
         }
 
-        // console.log("updatedValues",updatedValues)
-
-        // id = Number(id);
         const updateUrl = `http://localhost:3000/users/${id}`;
         fetch(updateUrl, { 
             method: "PUT",
             headers: {
-                'Content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(updatedValues)
         })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const index = userData.findIndex(user => Number(user.id) === id);
+            if (index !== -1) {
+                loadData(userData);
+            }
+        })
+        .catch(error => console.error('Error updating data:', error));
 
-        // userData[id] = updatedValues;
         document.querySelector(".create-form").classList.replace("hide", "show");
         document.querySelector(".update-form").classList.replace("show", "hide");
-
-        // console.table(userData);
 
         document.querySelector("#uid").value = "";
         document.querySelector("#uname").value = "";
         document.querySelector("#uemail").value = "";
         document.querySelector("#uage").value = "";
-        loadData(userData);
     } else {
         let createForm = document.querySelector(".forms-container");
 
@@ -192,9 +192,10 @@ function updateRecord(event) {
         setTimeout(() => {
             let error = document.querySelector(".create-form-error");
             error.remove();
-        }, 3000)
+        }, 3000);
     }
 }
+
 
 // Function to Delete Records
 function deleteHandler(currentID) {

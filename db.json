@@ -13,12 +13,6 @@
       "age": "66"
     },
     {
-      "id": "4",
-      "name": "Rohan",
-      "email": "Rohan@sd.com",
-      "age": "13"
-    },
-    {
       "id": "5",
       "name": "Raj",
       "email": "Raj@tz.com",
@@ -44,7 +38,7 @@
     },
     {
       "id": "61",
-      "name": "qdewewqew",
+      "name": "asdqa",
       "email": "tabrez.dal@gmail.com",
       "age": "96"
     },
@@ -52,7 +46,13 @@
       "id": "42",
       "name": "Anna Horten",
       "email": "tabrez.dal@gmail.com",
-      "age": "40"
+      "age": "60"
+    },
+    {
+      "id": "89",
+      "name": "Anna Horten",
+      "email": "tabrez.dal@gmail.com",
+      "age": "12"
     }
   ]
 }
