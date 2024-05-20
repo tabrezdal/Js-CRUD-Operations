@@ -13,21 +13,23 @@
         <h1>Js CRUD Operations</h1>
         
         <div class="forms-container">
-            <form class="create-form show" onsubmit="createRecord(event)">
+            <form class="forms create-form show" onsubmit="createRecord(event)">
                 <input type="text" id="name" name="name" placeholder="Enter name"/>
                 <input type="email" id="email" name="email" placeholder="Enter email"/>
                 <input type="text" id="age" name="age" placeholder="Enter age"/>
                 <button type="submit" class="add-button">Add Record</button>
             </form>
-            <form class="update-form hide" method="post">
+            <form class="forms update-form hide" onsubmit="updateRecord(event)">
+                <input type="text" id="uid" name="uid" placeholder="id" hidden/>
                 <input type="text" id="uname" name="name" placeholder="Enter name"/>
                 <input type="email" id="uemail" name="email" placeholder="Enter email"/>
                 <input type="text"  id="uage" name="age" placeholder="Enter age"/>
-                <button type="submit" onclick="updateRecord()" class="update-button">Update Details</button>
+                <button type="submit" class="update-button">Update Details</button>
             </form>
+            <p class="no-data hide">Sorry, No records found!</p>
         </div>
 
-        <div class="table-container">
+        <div class="table-container hide">
             <table>
                 <tr>
                     <th width="15%">Name</th>
