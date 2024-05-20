@@ -37,8 +37,8 @@ function loadData(data) {
             <td>${item.email}</td>
             <td>${item.age}</td>
             <td>
-                <button class="update" onclick="updateHandler('${item.id}')">Update</button>
-                <button class="delete" onclick="deleteHandler('${item.id}')">Delete</button>
+                <button class="update" onclick="updateHandler(${item.id})">Update</button>
+                <button class="delete" onclick="deleteHandler(${item.id})">Delete</button>
             </td>
         </tr>`
 
@@ -185,8 +185,7 @@ function deleteHandler(currentID) {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            // Filtering out the element with the specified id
-            userData = userData.filter(ele => ele.id !== idToDelete);
+            // console.log("userData::",userData)
             loadData(userData);
         })
         .catch(error => console.error('Error deleting data:', error));
