@@ -1,24 +1,24 @@
 var totalRecords = 0; // created for asigning id to new records
+let userData;
 
-// Data
-let userData = [{
-        "id": 0,
-        "name": "Tabrez",
-        "email": "tabrez@tz.com",
-        "age": "29"
-    },
-    {
-        "id": 1,
-        "name": "Shahnawaz",
-        "email": "shahnawaz@sd.com",
-        "age": "25"
-    }
-]
 
 
 window.addEventListener("load", function () {
+
+    // Data
+    function getData(){
+        const url = "http://localhost:3000/users";
+    
+        fetch(url)
+        .then((result) => result.json())
+        .then((result) => {
+            userData = result;
+            loadData(userData); // Call loadData here
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
     // loads data into table
-    loadData(userData);
+    getData(); 
 })
 
 
