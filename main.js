@@ -2,7 +2,6 @@ var totalRecords = 0; // created for asigning id to new records
 let userData;
 
 
-
 window.addEventListener("load", function () {
 
     // Data
@@ -70,7 +69,11 @@ function createRecord(event) {
     let age = document.querySelector("#age").value;
 
     if (name !== "" && email !== "" && (age > 0 && age < 100)) {
-        let id = totalRecords;
+
+        let randomId = Math.floor(Math.random() * 90) + 10;
+        // console.log("randomId", randomId)
+
+        let id = String(randomId);
 
         // console.log("Total Records::", totalRecords)
 
@@ -81,8 +84,17 @@ function createRecord(event) {
             age
         }
 
+        const createUrl = `http://localhost:3000/users/`;
+        fetch(createUrl, { 
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newRecord)
+        })
+
         // console.log("newRecord",newRecord)
-        userData.push(newRecord);
+        // userData.push(newRecord);
 
         document.querySelector("#name").value = "";
         document.querySelector("#email").value = "";
@@ -105,23 +117,24 @@ function createRecord(event) {
 };
 
 
-
-
 // Function to Open Update Form and populate values from Records
 function updateHandler(currentID) {
+    currentID = Number(currentID);
+    
+    // Find the user data by id
+    const user = userData.find(user => Number(user.id) === currentID);
 
-    // console.log("currentID from Function Call:::",currentID)
+    if (user) {
+        document.querySelector(".create-form").classList.replace("show", "hide");
+        document.querySelector(".update-form").classList.replace("hide", "show");
 
-    // console.log("update function called from record ", currentID);
-    document.querySelector(".create-form").classList.replace("show", "hide");
-    document.querySelector(".update-form").classList.replace("hide", "show");
-
-    // console.log("userData name::", userData[currentID].name)
-
-    document.querySelector("#uid").value = userData[currentID].id;
-    document.querySelector("#uname").value = userData[currentID].name;
-    document.querySelector("#uemail").value = userData[currentID].email;
-    document.querySelector("#uage").value = userData[currentID].age;
+        document.querySelector("#uid").value = user.id;
+        document.querySelector("#uname").value = user.name;
+        document.querySelector("#uemail").value = user.email;
+        document.querySelector("#uage").value = user.age;
+    } else {
+        console.error(`User with ID ${currentID} not found`);
+    }
 }
 
 
@@ -135,10 +148,12 @@ function updateRecord(event) {
     let name = document.querySelector("#uname").value;
     let email = document.querySelector("#uemail").value;
     let age = document.querySelector("#uage").value;
-    let id = Number(document.querySelector("#uid").value);
+    let id = document.querySelector("#uid").value;
     // let filteredUserData = userData.filter((item) => item !== uid);
 
     if (name !== "" && email !== "" && (age > 0 && age < 100)) {
+        
+
         let updatedValues = {
             id,
             name,
@@ -148,7 +163,17 @@ function updateRecord(event) {
 
         // console.log("updatedValues",updatedValues)
 
-        userData[id] = updatedValues;
+        // id = Number(id);
+        const updateUrl = `http://localhost:3000/users/${id}`;
+        fetch(updateUrl, { 
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedValues)
+        })
+
+        // userData[id] = updatedValues;
         document.querySelector(".create-form").classList.replace("hide", "show");
         document.querySelector(".update-form").classList.replace("show", "hide");
 
@@ -178,7 +203,7 @@ function deleteHandler(currentID) {
 
     const delUrl = `http://localhost:3000/users/${idToDelete}`;
 
-    console.log("delUrl::", delUrl);
+    // console.log("delUrl::", delUrl);
 
     fetch(delUrl, { method: "DELETE" })
         .then(response => {
