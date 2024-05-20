@@ -6,19 +6,19 @@ let userData;
 window.addEventListener("load", function () {
 
     // Data
-    function getData(){
+    function getData() {
         const url = "http://localhost:3000/users";
-    
+
         fetch(url)
-        .then((result) => result.json())
-        .then((result) => {
-            userData = result;
-            loadData(userData); // Call loadData here
-        })
-        .catch(error => console.error('Error fetching data:', error));
+            .then((result) => result.json())
+            .then((result) => {
+                userData = result;
+                loadData(userData); // Call loadData here
+            })
+            .catch(error => console.error('Error fetching data:', error));
     }
     // loads data into table
-    getData(); 
+    getData();
 })
 
 
@@ -173,15 +173,21 @@ function updateRecord(event) {
 
 // Function to Delete Records
 function deleteHandler(currentID) {
-    // console.log("delete function called from record ID is:: ", currentID);
-
     // Convert currentID to a number if necessary
     const idToDelete = Number(currentID);
 
-    // Filtering out the element with the specified id
-    userData = userData.filter(ele => ele.id !== idToDelete);
+    const delUrl = `http://localhost:3000/users/${idToDelete}`;
 
-    // console.log("delete function called from record now::")
-    // console.table(userData);
-    loadData(userData);
+    console.log("delUrl::", delUrl);
+
+    fetch(delUrl, { method: "DELETE" })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            // Filtering out the element with the specified id
+            userData = userData.filter(ele => ele.id !== idToDelete);
+            loadData(userData);
+        })
+        .catch(error => console.error('Error deleting data:', error));
 }
